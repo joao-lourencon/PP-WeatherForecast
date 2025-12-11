@@ -1,0 +1,4 @@
+builder.ConfigureFonts(fonts =>
+{
+    fonts.AddFont("TimesNewRoman.ttf", "TimesNew");
+});

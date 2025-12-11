@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestesPP.Views.MainPage"
+             Background="#5eb9f2">
+
+    <VerticalStackLayout Padding="30" Spacing="5">
+
+        <Label Text="PREVISÃO DO TEMPO 🌤"
+       FontSize="50"
+            FontAttributes="Bold"
+            TextColor="White"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            Margin="0,20,0,30"
+            LineBreakMode="WordWrap"
+            FontFamily="TimesNew"/>
+
+            <Label Text="Insira o CEP"
+           FontSize="30"
+           TextColor="White"
+           FontAttributes="Bold"
+               Margin="0 0 10 5"/>
+
+        <Frame Padding="8"
+           BackgroundColor="White"
+           CornerRadius="20"
+           HasShadow="False"
+           BorderColor="White">
+
+            <Entry Placeholder="Ex. 0000-000"
+                Text="{Binding Cep}"
+                TextColor="Black"
+                Keyboard="Numeric"
+                HorizontalOptions="FillAndExpand"
+                Margin="10,0"
+                FontSize="16"/>
+        </Frame>
+
+        <Button Text="Buscar Previsão"
+                Command="{Binding BuscarCommand}"
+                BackgroundColor="#0077CC"
+                TextColor="White"
+                CornerRadius="10"
+                Margin="20 50 20 50"
+                Padding="20"
+                FontAttributes="Bold"
+                FontSize="16"/>
+
+        <CollectionView ItemsSource="{Binding Previsoes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="5" Padding="10" CornerRadius="12" BackgroundColor="#32487a">
+                        <HorizontalStackLayout Spacing="15">
+
+                            <Image Source="{Binding Icon}" WidthRequest="50"/>
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Condicao}" FontAttributes="Bold" TextColor="White" FontSize="18" WidthRequest="200"/>
+                                <Label Text="{Binding TempAtual, StringFormat='Agora: {0}°C'}"
+                                    TextColor="White" FontSize="15" Margin="13 0"/>
+                                <HorizontalStackLayout Spacing="10">
+                                    <!-- 10 dp entre os dois labels -->
+                                    <Label Text="{Binding TempMax, StringFormat='{0}°C'}" FontSize="17" TextColor="White"/>
+                                    <Label Text="/" TextColor="White"/>
+                                    <Label Text="{Binding TempMin, StringFormat='{0}°C'}" FontSize="17" TextColor="White"/>
+                                </HorizontalStackLayout>
+
+                            </VerticalStackLayout>
+
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+
+</ContentPage>
