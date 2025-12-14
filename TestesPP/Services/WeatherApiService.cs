@@ -10,7 +10,7 @@ namespace TestesPP.Services
     public class WeatherApiService
     {
         private readonly HttpClient _http = new HttpClient();
-        private readonly string apiKey = "9efd48b0f66041a8aac120409250812";
+        private readonly string apiKey = "";
 
         public async Task<List<Clima>> GetForecast(string city)
         {
