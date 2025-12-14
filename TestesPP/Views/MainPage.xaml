@@ -4,7 +4,7 @@
              x:Class="TestesPP.Views.MainPage"
              Background="#5eb9f2">
 
-    <VerticalStackLayout Padding="30" Spacing="5">
+    <VerticalStackLayout Padding="30" Spacing="3">
 
         <Label Text="PREVISÃO DO TEMPO 🌤"
        FontSize="50"
@@ -50,19 +50,18 @@
         <CollectionView ItemsSource="{Binding Previsoes}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Margin="5" Padding="10" CornerRadius="12" BackgroundColor="#32487a">
+                    <Frame Margin="5" Padding="4" CornerRadius="12" BackgroundColor="LightBlue">
                         <HorizontalStackLayout Spacing="15">
 
                             <Image Source="{Binding Icon}" WidthRequest="50"/>
                             <VerticalStackLayout>
-                                <Label Text="{Binding Condicao}" FontAttributes="Bold" TextColor="White" FontSize="18" WidthRequest="200"/>
-                                <Label Text="{Binding TempAtual, StringFormat='Agora: {0}°C'}"
-                                    TextColor="White" FontSize="15" Margin="13 0"/>
+                                <Label Text="{Binding DiaSemana}" FontSize="20" FontAttributes="Bold" Margin="11 0 15 0" TextColor="MidnightBlue"/>
+                                <Label Text="(Hoje)" FontSize="20" TextColor="MidnightBlue" IsVisible="{Binding EhHoje}"/>
+                                <Label Text="{Binding Condicao}" FontAttributes="Bold" TextColor="Black" FontSize="18" WidthRequest="200" Margin="0 0 10 0"/>
                                 <HorizontalStackLayout Spacing="10">
-                                    <!-- 10 dp entre os dois labels -->
-                                    <Label Text="{Binding TempMax, StringFormat='{0}°C'}" FontSize="17" TextColor="White"/>
-                                    <Label Text="/" TextColor="White"/>
-                                    <Label Text="{Binding TempMin, StringFormat='{0}°C'}" FontSize="17" TextColor="White"/>
+                                    <Label Text="{Binding TempMax, StringFormat='↑ {0}°C'}" FontSize="17" TextColor="Red"/>
+                                    <Label Text="/" TextColor="Black"/>
+                                    <Label Text="{Binding TempMin, StringFormat='↓ {0}°C'}" FontSize="17" TextColor="Blue"/>
                                 </HorizontalStackLayout>
 
                             </VerticalStackLayout>

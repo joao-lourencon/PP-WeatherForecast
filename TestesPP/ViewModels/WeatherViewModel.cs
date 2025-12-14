@@ -18,7 +18,7 @@ namespace TestesPP.ViewModels
         public string cep;
 
         [ObservableProperty]
-        public string enderecoCompleto;
+        private Clima climaHoje;
 
         public ObservableCollection<Clima> Previsoes { get; set; }
             = new ObservableCollection<Clima>();
@@ -27,10 +27,6 @@ namespace TestesPP.ViewModels
 
         private async Task Buscar()
         {
-            var endereco = await brasilApi.GetEnderecoByCep(cep);
-            if (endereco != null)
-                EnderecoCompleto = $"{endereco.Logradouro}, {endereco.Bairro}, {endereco.Cidade}-{endereco.Estado}";
-
             var cidade = await brasilApi.GetCityByCep(cep);
             var previsao = await weatherApi.GetForecast(cidade);
 

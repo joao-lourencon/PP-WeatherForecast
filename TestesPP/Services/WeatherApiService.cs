@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http.Json;
 using System.Text;
 using TestesPP.Models;
@@ -13,32 +14,50 @@ namespace TestesPP.Services
 
         public async Task<List<Clima>> GetForecast(string city)
         {
-            var url = $"https://api.weatherapi.com/v1/forecast.json?key={apiKey}&q={city}&days=4&lang=pt";
-            var result = await _http.GetFromJsonAsync<WeatherApiResponse>(url);
+
 
             var lista = new List<Clima>();
 
-            lista.Add(new Clima
+            try
             {
-                Condicao = result.current.condition.text,
-                TempAtual = result.current.temp_c,
-                TempMax = result.forecast.forecastday[0].day.maxtemp_c,
-                TempMin = result.forecast.forecastday[0].day.mintemp_c,
-                Icon = "https:" + result.current.condition.icon
-            });
+                var url =
+                    $"https://api.weatherapi.com/v1/forecast.json" +
+                    $"?key={apiKey}&q={city}&days=4&lang=pt";
 
-            for (int i = 1; i < result.forecast.forecastday.Count; i++)
-            {
-                var day = result.forecast.forecastday[i];
+                var result = await _http.GetFromJsonAsync<WeatherApiResponse>(url);
 
-                lista.Add(new Clima
+
+                if (result?.forecast?.forecastday == null)
+                    return lista;
+
+                var cultura = new CultureInfo("pt-BR");
+                int index = 0;
+
+                foreach (var day in result.forecast.forecastday)
                 {
-                    Condicao = day.day.condition.text,
-                    TempAtual = double.NaN,
-                    TempMax = day.day.maxtemp_c,
-                    TempMin = day.day.mintemp_c,
-                    Icon = "https:" + day.day.condition.icon
-                });
+
+                    DateTime data = DateTime.Now.Date.AddDays(index);
+
+                    var dia = cultura.TextInfo.ToTitleCase(
+                        data.ToString("dddd", cultura)
+                    );
+
+                    lista.Add(new Clima
+                    {
+                        DiaSemana = dia,
+                        Condicao = day.day.condition.text,
+                        TempMax = day.day.maxtemp_c,
+                        TempMin = day.day.mintemp_c,
+                        Icon = "https:" + day.day.condition.icon,
+                        EhHoje = index == 0
+                    });
+
+                    index++;
+                }
+            }
+            catch
+            {
+
             }
 
             return lista;
