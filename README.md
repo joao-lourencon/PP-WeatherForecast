@@ -44,11 +44,4 @@ private readonly string apiKey = "SUA_CHAVE_AQUI";
 
 ## Imagens do Aplicativo em Funcionamento
 
-<div align="center">
-<table>
-<tr>
-<td><img src="TestesPP/Resources/Screenshots/Home.jpeg" width="90%"/></td>
-<td><img src="TestesPP/Resources/Screenshots/Previsoes.jpeg" width="90%"/></td>
-</tr>
-</table>
-<div/>
+<img src="TestesPP/Resources/Screenshots/PrintApp.jpeg" width="30%"/>
