@@ -2,6 +2,10 @@
 
 Este projeto foi desenvolvido como parte da matéria **PAM (Programação Mobile)** da escola, utilizando **C#** e **.NET MAUI** para criar um aplicativo mobile que exibe a previsão do tempo.
 
+##### Aluno: João Vitor Teixeira Lourençon
+##### RM: 231685
+
+
 ---
 
 ## Tecnologias utilizadas
